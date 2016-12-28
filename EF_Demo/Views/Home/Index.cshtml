@@ -1,0 +1,42 @@
+﻿@model List<EF_Demo.Models.Employee>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Add New Employee</h2>
+<form action="/home/AddEmployee" method="post">
+    <table>
+        <tr>
+            <td>First Name <input type="text" name="first_name" /></td>
+        </tr>
+        <tr>
+            <td>Last Name <input type="text" name="last_name" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+<h2>Employee Information</h2>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.id</td>
+            <td>@a.first_name</td>
+            <td>@a.last_name</td>
+            <td>
+                <form id="@a.id" action="/Home/DeleteEmployee" method="post">
+                    <input name="id" type="hidden" value="@a.id" />
+                    <a style="cursor: pointer" onclick="del('@a.id')">Delete</a>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+
